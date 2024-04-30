@@ -1,0 +1,7 @@
+{
+  "name": "recipe-app",
+  "private": true,
+  "scripts": {
+    "vercel-build": "npm run build --prefix frontend && npm run build --prefix backend"
+  }
+}

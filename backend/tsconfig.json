@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "CommonJS",
+      "lib": ["ESNext", "DOM"],
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "moduleResolution": "Node",
+      "rootDir": ".",
+      "outDir": "./build",
+      "resolveJsonModule": true,
+      "jsx": "react"
+    },
+    "include": ["app.ts"],
+    "exclude": ["node_modules", "build"]
+  }
+  
