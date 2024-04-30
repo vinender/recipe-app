@@ -2,18 +2,26 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Uploader from '../uploader/uploader';
 import http from '../../utils/api/http';
+import useCurrentUserDetails from '../../utils/user/currentUserDetails';
+import ProtectedRoute from '../../utils/protectedRoutes';
+import { useRouter } from 'next/router';
 
 function RecipeForm() {
+    const { userDetails, loading, error } = useCurrentUserDetails();
+    console.log('user deails', userDetails)
     const { control, handleSubmit, formState: { errors } } = useForm();
     const [ingredients, setIngredients] = useState([]);
     const [recipeImage, setRecipeImage] = useState('');
-    
+    const router = useRouter()
+
     const onSubmit = async (formData) => {
+      console.log('formdata',formData)
       try {
         formData.ingredients = ingredients;
-        formData.recipe_image = recipeImage;
-        
-        const response = await http.post(`${process.env.REACT_APP_API_URL}/recipe`, formData, {
+          formData.created_by = userDetails?._id;
+          // formData.recipe_image = recipeImage;
+          formData.append('recipe_image', recipeImage);
+        const response = await http.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/recipe`,formData, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -24,6 +32,7 @@ function RecipeForm() {
         if (token) {
           localStorage.setItem('token', token);
         }
+        router.push('/recipe')
       } catch (error) {
         console.error('Recipe creation failed:', error.response.data);
       }
@@ -48,7 +57,11 @@ function RecipeForm() {
     };
   
     return(
-        <div className="flex h-screen w-full flex-col bg-black text-black justify-center px-6 py-12 lg:px-8">
+           <ProtectedRoute> 
+ 
+         <div className="flex h-screen w-full flex-col bg-black text-black justify-center px-6 py-12 lg:px-8">
+         <button onClick={()=>router.push('/recipe')} className='bg-red-700 rounded-lg text-white font-semibold mt-2 w-36 p-1 px-3  border'>All Recipe</button>
+
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">Create Recipe</h2>
         </div>
@@ -108,10 +121,10 @@ function RecipeForm() {
             </div>
   
             <div className="">
-              <label htmlFor="description" className="block text-sm font-medium leading-6 text-white">Description</label>
+              <label htmlFor="instructions" className="block text-sm font-medium leading-6 text-white">Description</label>
               <div className="mt-2">
                 <Controller
-                  name="description"
+                  name="instructions"
                   control={control}
                   defaultValue=""
                   render={({ field }) => (
@@ -134,6 +147,7 @@ function RecipeForm() {
           </form>
         </div>
       </div>
+      </ProtectedRoute>
   );
 }
 

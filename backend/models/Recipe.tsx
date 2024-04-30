@@ -20,7 +20,7 @@ const recipeSchema = new mongoose.Schema({
     image: {
         type: String  // Assuming you'll store image URLs
     },
-    createdBy: {
+    created_by: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',  // Assuming you have a User model
         required: true

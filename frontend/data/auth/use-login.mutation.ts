@@ -24,7 +24,7 @@ export const useLoginMutation = () => {
       // router.push('/');
 
       // Redirect based on the user's role
-         router.push('/text');
+         router.push('/recipe');
      },
     onError: (error) => {
       console.log('Login failed:', error.response ? error.response.data : error);

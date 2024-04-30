@@ -15,7 +15,9 @@ export const login = (user) => ({
   };
   
   
-
+  export const getCurrentUser = () => ({
+    type: 'GET_CURRENT_USER',
+  });
   // authActions.js
 
 export const updateUser = (userData) => ({

@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/', require('./routes/authRoutes').default);
 app.use('/', require('./routes/uploadRoutes').default);
 app.use('/', require('./routes/recipeRoutes').default);
+app.use('/', require('./routes/userRoutes').default);
 
 app.use('/api/videos', require('./routes/videoRoutes').default);
 

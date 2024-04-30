@@ -12,7 +12,7 @@ const Navbar = () => {
   const isLoggedIn = useSelector(state => state?.auth?.token);
 
   useEffect(()=>{
-    isLoggedIn.length && setAuthStatus(true)
+    isLoggedIn?.length && setAuthStatus(true)
   },[])
   const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

@@ -6,6 +6,7 @@ const router = express.Router();
 
 // Create a new recipe
 router.post('/recipe', authenticate, recipeController.createRecipe);
+router.get('/recipe', authenticate, recipeController.getAllRecipes);
 
 // Add other routes for getting, updating, and deleting recipes as needed
 

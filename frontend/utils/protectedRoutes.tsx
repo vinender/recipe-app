@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
   }, [authToken, router]);
 
   // Render children if authenticated
-  return authToken ? <>{children}</> : null;
+  return authToken ? <div>{children}</div> : null;
 };
 
 export default ProtectedRoute;
