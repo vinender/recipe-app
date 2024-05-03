@@ -7,20 +7,21 @@ import { useSelector } from 'react-redux';
 
 const ProtectedRoute = ({ children }) => {
   const router = useRouter();
-  const authToken = useSelector(state => state.auth.token);
 
   useEffect(() => {
     // This code runs only on the client side
-    // Check for the presence of authentication token
-    const storedToken = localStorage.getItem('token');
-    if (!authToken && !storedToken) {
-      // Redirect to login page if authentication token is missing
-      router.replace('/login');
+    if (typeof window !== 'undefined') {
+      const authToken = localStorage.getItem('token');
+      if (!authToken) {
+        // Redirect to login page if authentication token is missing
+        router.replace('/login');
+      }
     }
-  }, [authToken, router]);
+  }, [router]);
 
   // Render children if authenticated
-  return authToken ? <div>{children}</div> : null;
+  return <div>{children}</div>;
 };
 
 export default ProtectedRoute;
+

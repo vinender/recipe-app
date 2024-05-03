@@ -7,7 +7,7 @@ export default function RecipeForm() {
   return (
 
     <div className = ''> 
-    
+     
          <CreateRecipeForm/>
 
     </div>

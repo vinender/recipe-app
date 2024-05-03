@@ -5,6 +5,7 @@ import http from '../../utils/api/http';
 import useCurrentUserDetails from '../../utils/user/currentUserDetails';
 import ProtectedRoute from '../../utils/protectedRoutes';
 import { useRouter } from 'next/router';
+import Navbar from '../navbar/navbar';
 
 function RecipeForm() {
     const { userDetails, loading, error } = useCurrentUserDetails();
@@ -58,7 +59,7 @@ function RecipeForm() {
   
     return(
            <ProtectedRoute> 
- 
+             <Navbar  />
          <div className="flex h-screen w-full flex-col bg-black text-black justify-center px-6 py-12 lg:px-8">
          <button onClick={()=>router.push('/recipe')} className='bg-red-700 rounded-lg text-white font-semibold mt-2 w-36 p-1 px-3  border'>All Recipe</button>
 
