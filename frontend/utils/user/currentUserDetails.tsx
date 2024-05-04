@@ -2,12 +2,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import http from '../api/http';
+import { useRouter } from 'next/router';
  
 const useCurrentUserDetails = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchCurrentUserDetails = async () => {
       try {
@@ -16,8 +17,10 @@ const useCurrentUserDetails = () => {
         setUserDetails(response.data);
         setLoading(false);
       } catch (error) {
+        router.push('/login')
         setError(error);
         setLoading(false);
+        
       }
     };
 

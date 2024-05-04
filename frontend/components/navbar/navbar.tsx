@@ -18,6 +18,8 @@ const Navbar = () => {
     isLoggedIn?.length && setAuthStatus(true);
   }, [isLoggedIn]);
 
+  console.log('is lopgged in',isLoggedIn)
+
   const handleLogout = () => {
     dispatch(logout());
     router.push('/login');
@@ -44,7 +46,7 @@ const Navbar = () => {
   return (
     <div className="flex items-center  fixed top-0 z-50  w-full p-4 bg-gray-800 text-white">
       <div className="flex items-center">
-        <div onClick={()=>router.push('/recipe')} className=" cursor-pointer text-xl font-bold">Logo</div>
+        <div onClick={()=>router.push('/recipe')} className=" cursor-pointer text-xl font-bold">Tech_Inject</div>
       </div>
       <div className="flex-grow  "></div> 
   

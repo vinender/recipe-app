@@ -17,8 +17,9 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String  // Assuming you'll store image URLs
+    recipe_image: {
+        type: String,  // Assuming you'll store image URLs
+        // required: true,
     },
     created_by: {
         type: mongoose.Schema.Types.ObjectId,

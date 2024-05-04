@@ -1,14 +1,18 @@
 import { Request, Response } from 'express';
 import Recipe from '../models/Recipe';
- 
+
+
 export const createRecipe = async (req: Request, res: Response) => {
   try {
-    console.log('recipe',req.body)
-    // Extract data from request body
+    // Extract fields from the request body
     const { name, category, ingredients, instructions, recipe_image, created_by } = req.body;
-    // Assuming you have middleware to extract user from request
- 
-    // Create a new recipe
+
+    // Check if all required fields are present
+    if (!name || !category || !ingredients || !instructions || !recipe_image || !created_by) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    // Create a new recipe object
     const recipe = new Recipe({
       name,
       category,
@@ -66,7 +70,7 @@ export const  updateRecipe = async (req: Request, res: Response) => {
         recipe.category = category;
         recipe.ingredients = ingredients;
         recipe.instructions = instructions;
-        recipe.image = image;
+        recipe.recipe_image = image;
         const updatedRecipe = await recipe.save();
         res.json(updatedRecipe);
     } catch (err) {
